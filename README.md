@@ -39,14 +39,26 @@ vector_db.update_text(index, new_text)
 ```
 This will update the text and its corresponding embedding at the specified index with the new text.
 
-6. Iterate over the stored texts:
+6. Save the database to a file:
+```python
+vector_db.save('vector_db.pkl')
+```
+This will save the current state of the `VectorDB` instance to a file named 'vector_db.pkl'.
+
+7. Load the database from a file:
+```python
+vector_db = VectorDB.load('vector_db.pkl')
+```
+This will load the `VectorDB` instance from the file named 'vector_db.pkl' and return it.
+
+8. Iterate over the stored texts:
 ```python
 for text in vector_db:
     print(text)
 ```
 This will iterate over all the texts stored in the database.
 
-7. Access individual texts by index:
+9. Access individual texts by index:
 ```python
 index = 2
 text = vector_db[index]
@@ -54,7 +66,7 @@ print(text)
 ```
 This will retrieve the text at the specified index.
 
-8. Get the number of texts in the database:
+10. Get the number of texts in the database:
 ```python
 num_texts = len(vector_db)
 print(num_texts)
@@ -84,9 +96,15 @@ vector_db.update_text(1, "i enjoy playing chess")
 # Delete a text
 vector_db.delete_text(2)
 
-# Iterate over the stored texts
-print("\nStored texts:")
-for text in vector_db:
+# Save the database
+vector_db.save('vector_db.pkl')
+
+# Load the database
+loaded_vector_db = VectorDB.load('vector_db.pkl')
+
+# Iterate over the stored texts in the loaded database
+print("\nStored texts in the loaded database:")
+for text in loaded_vector_db:
     print(text)
 ```
 
