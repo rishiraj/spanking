@@ -1,5 +1,6 @@
 import jax
 import jax.numpy as jnp
+import pickle
 from sentence_transformers import SentenceTransformer
 
 class VectorDB:
@@ -36,6 +37,15 @@ class VectorDB:
         similarities = jnp.dot(self.embeddings, query_embedding.T).squeeze()
         top_indices = jnp.argsort(similarities)[-top_k:][::-1]
         return [(self.texts[i], similarities[i]) for i in top_indices]
+    
+    def save(self, file_path):
+        with open(file_path, 'wb') as file:
+            pickle.dump(self, file)
+
+    @staticmethod
+    def load(file_path):
+        with open(file_path, 'rb') as file:
+            return pickle.load(file)
     
     def __len__(self):
         return len(self.texts)
