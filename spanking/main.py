@@ -20,7 +20,7 @@ class VectorDB:
     def delete_text(self, index):
         if 0 <= index < len(self.texts):
             self.texts.pop(index)
-            self.embeddings = self.embeddings.at[index].delete()
+            self.embeddings = jnp.delete(self.embeddings, index, axis=0)
         else:
             raise IndexError("Invalid index")
 
