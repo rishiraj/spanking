@@ -1,2 +1,2 @@
+from .main import VectorDB
 from .main import main
-from .loader import AutoChatRoom
