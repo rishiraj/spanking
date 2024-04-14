@@ -26,8 +26,8 @@ class VectorDB:
     def update_text(self, index, new_text):
         if 0 <= index < len(self.texts):
             self.texts[index] = new_text
-            new_embedding = self.model.encode([new_text], normalize_embeddings=True)
-            self.embeddings = jax.ops.index_update(self.embeddings, index, new_embedding)
+            new_embedding = self.model.encode([new_text], normalize_embeddings=True).squeeze()
+            self.embeddings = (self.embeddings).at[index].set(new_embedding)
         else:
             raise IndexError("Invalid index")
     
