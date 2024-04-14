@@ -26,6 +26,9 @@ with open("spanking/VERSION", "w", encoding="utf-8") as fh:
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+with open('requirements.txt') as fh:
+    requirements = fh.read().splitlines()
+
 setuptools.setup(
     name="spanking",
     version=spanking_version,
@@ -45,7 +48,5 @@ setuptools.setup(
     ],
     python_requires=">=3.9",
     entry_points={"console_scripts": ["spanking = spanking.main:main"]},
-    install_requires=[
-        "numpy >= 1.26.4",
-    ],
+    install_requires=requirements,
 )
