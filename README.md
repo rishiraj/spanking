@@ -51,14 +51,20 @@ vector_db = VectorDB.load('vector_db.pkl')
 ```
 This will load the `VectorDB` instance from the file named 'vector_db.pkl' and return it.
 
-8. Iterate over the stored texts:
+8. Convert the database to a Pandas Dataframe
+```python
+df = vector_db.to_df()
+```
+This will convert the current state of the `VectorDB` instance to a Pandas Dataframe.
+
+9. Iterate over the stored texts:
 ```python
 for text in vector_db:
     print(text)
 ```
 This will iterate over all the texts stored in the database.
 
-9. Access individual texts by index:
+10. Access individual texts by index:
 ```python
 index = 2
 text = vector_db[index]
@@ -66,7 +72,7 @@ print(text)
 ```
 This will retrieve the text at the specified index.
 
-10. Get the number of texts in the database:
+11. Get the number of texts in the database:
 ```python
 num_texts = len(vector_db)
 print(num_texts)
@@ -106,6 +112,10 @@ loaded_vector_db = VectorDB.load('vector_db.pkl')
 print("\nStored texts in the loaded database:")
 for text in loaded_vector_db:
     print(text)
+
+# Convert to dataframe
+df = loaded_vector_db.to_df()
+print(df.head())
 ```
 
 This example demonstrates how to create a 🍑👋 `VectorDB` instance, add texts, search for similar texts, update and delete texts, and iterate over the stored texts.
