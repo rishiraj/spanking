@@ -2,6 +2,7 @@ import jax
 import jax.numpy as jnp
 import pickle
 from sentence_transformers import SentenceTransformer
+import pandas as pd
 
 class VectorDB:
     def __init__(self, model_name='BAAI/bge-base-en-v1.5'):
@@ -46,6 +47,13 @@ class VectorDB:
     def load(file_path):
         with open(file_path, 'rb') as file:
             return pickle.load(file)
+    
+    def to_df(self):
+        data = {
+            'text': self.texts,
+            'embedding': [embedding.tolist() for embedding in self.embeddings]
+        }
+        return pd.DataFrame(data)
 
     def __len__(self):
         return len(self.texts)
