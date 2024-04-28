@@ -3,6 +3,8 @@ import jax.numpy as jnp
 import pickle
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
+from PIL import Image
+import requests
 import pandas as pd
 
 class VectorDB:
