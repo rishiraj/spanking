@@ -37,7 +37,7 @@ class VectorDB:
         query_embedding = jnp.array(self.model.encode([query], normalize_embeddings=True))
         similarities = jnp.dot(self.embeddings, query_embedding.T).squeeze()
         top_indices = jnp.argsort(similarities)[-top_k:][::-1]
-        return [(self.texts[i], similarities[i]) for i in top_indices]
+        return [(self.texts[i], float(similarities[i])) for i in top_indices]
 
     def save(self, file_path):
         with open(file_path, 'wb') as file:
@@ -47,7 +47,7 @@ class VectorDB:
     def load(file_path):
         with open(file_path, 'rb') as file:
             return pickle.load(file)
-    
+
     def to_df(self):
         data = {
             'text': self.texts,
