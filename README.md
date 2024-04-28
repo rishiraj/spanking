@@ -16,13 +16,21 @@ vector_db.add_texts(texts)
 ```
 This will encode the texts into embeddings and store them in the database.
 
-3. Search for similar texts:
+3. Search for similar texts or images:
 ```python
-query = "we play football"
-top_results = vector_db.search(query, top_k=3)
-print(top_results)
+text_query = "we play football"
+text_results = vector_db.search(text_query, top_k=2, type='text')
+print("Text search results:")
+for text, similarity in text_results:
+    print(f"Text: {text}, Similarity: {similarity}")
+
+image_url = "https://example.com/image.jpg"
+image_results = vector_db.search(image_url, top_k=2, type='image')
+print("\nImage search results:")
+for text, similarity in image_results:
+    print(f"Text: {text}, Similarity: {similarity}")
 ```
-This will retrieve the top-3 most similar texts to the query based on cosine similarity. The `search` method returns a list of tuples, where each tuple contains the text and its similarity score.
+This will retrieve the top-2 most similar texts or images to the query based on cosine similarity. The `search` method returns a list of tuples, where each tuple contains the text and its similarity score. You can specify the search type using the `type` parameter (`'text'` for text search and `'image'` for image search).
 
 4. Delete a text from the database:
 ```python
