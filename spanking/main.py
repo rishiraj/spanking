@@ -2,11 +2,13 @@ import jax
 import jax.numpy as jnp
 import pickle
 from sentence_transformers import SentenceTransformer
+from transformers import pipeline
 import pandas as pd
 
 class VectorDB:
     def __init__(self, model_name='BAAI/bge-base-en-v1.5'):
         self.model = SentenceTransformer(model_name)
+        self.image_classifier = pipeline(task="zero-shot-image-classification", model="google/siglip-so400m-patch14-384")
         self.texts = []
         self.embeddings = None
 
@@ -33,9 +35,17 @@ class VectorDB:
         else:
             raise IndexError("Invalid index")
 
-    def search(self, query, top_k=5):
-        query_embedding = jnp.array(self.model.encode([query], normalize_embeddings=True))
-        similarities = jnp.dot(self.embeddings, query_embedding.T).squeeze()
+    def search(self, query, top_k=5, type='text'):
+        if type == 'text':
+            query_embedding = jnp.array(self.model.encode([query], normalize_embeddings=True))
+            similarities = jnp.dot(self.embeddings, query_embedding.T).squeeze()
+        elif type == 'image':
+            if isinstance(query, str):
+                query = Image.open(requests.get(query, stream=True).raw)
+            outputs = self.image_classifier(query, candidate_labels=self.texts)
+            similarities = jnp.array([output['score'] for output in outputs])
+        else:
+            raise ValueError("Invalid search type. Supported types are 'text' and 'image'.")
         top_indices = jnp.argsort(similarities)[-top_k:][::-1]
         return [(self.texts[i], float(similarities[i])) for i in top_indices]
 
