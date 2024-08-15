@@ -4,12 +4,12 @@
   <tr>
     <td>
       <a href="http://127.0.0.1:5000">
-        <img src="/assets/home.png"/>
+        <img src="https://raw.githubusercontent.com/rishiraj/spanking/main/assets/home.png"/>
       </a>
     </td>
     <td>
       <a href="http://127.0.0.1:5000/search">
-        <img src="/assets/search.png"/>
+        <img src="https://raw.githubusercontent.com/rishiraj/spanking/main/assets/search.png"/>
       </a>
     </td>
   </tr>
