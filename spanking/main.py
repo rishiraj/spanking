@@ -8,7 +8,7 @@ import requests
 import pandas as pd
 
 class VectorDB:
-    def __init__(self, model_name='Alibaba-NLP/gte-base-en-v1.5'):
+    def __init__(self, model_name='avsolatorio/GIST-small-Embedding-v0'):
         self.model = SentenceTransformer(model_name, trust_remote_code=True)
         self.image_classifier = pipeline(task="zero-shot-image-classification", model="google/siglip-so400m-patch14-384")
         self.texts = []
