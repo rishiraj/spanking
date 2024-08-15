@@ -2,17 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search VectorDB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Spanking 🍑👋</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Search VectorDB</h1>
-    <form action="{{ url_for('search') }}" method="post">
-        <input type="text" name="query" placeholder="Search query" required>
-        <select name="type">
-            <option value="text">Text</option>
-            <option value="image">Image</option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
+    <div class="container">
+        <h1>Search Spanking 🍑👋</h1>
+        <p>Find the perfect match in your vector database</p>
+
+        <div class="card">
+            <form action="{{ url_for('search') }}" method="post">
+                <input type="text" name="query" placeholder="Search query" required>
+                <select name="type" class="dropdown">
+                    <option value="text">Text</option>
+                    <option value="image">Image</option>
+                </select>
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

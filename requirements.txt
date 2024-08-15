@@ -1,5 +1,8 @@
-jax==0.4.26
+Flask
+jax==0.4.31
+jaxlib==0.4.31
 sentence-transformers==2.7.0
+sentencepiece==0.2.0
 pandas==2.0.3
 transformers==4.40.1
 Pillow==9.4.0

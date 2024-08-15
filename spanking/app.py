@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 import os
-from .main import VectorDB
+from main import VectorDB
 
 app = Flask(__name__)
 db = VectorDB()

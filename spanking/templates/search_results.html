@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results for "{{ query }}"</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Search Results for "{{ query }}"</h1>
-    <ul>
-        {% for text, score in results %}
-            <li>{{ text }} (Score: {{ score }})</li>
-        {% endfor %}
-    </ul>
-    <a href="{{ url_for('index') }}">Back to Home</a>
+    <div class="container">
+        <h1>Search Results</h1>
+        <p>Here are the best matches for your query "{{ query }}":</p>
+
+        <div class="card">
+            <ul class="results-list">
+                {% for text, score in results %}
+                    <li class="result-item">{{ text }} <span class="score">(Score: {{ score }})</span></li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('index') }}" class="btn btn-back">Back to Home</a>
+        </div>
+    </div>
 </body>
 </html>
