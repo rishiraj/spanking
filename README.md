@@ -2,8 +2,16 @@
 
 <table>
   <tr>
-    <td><img src="/assets/home.png"/></td>
-    <td><img src="/assets/search.png"/></td>
+    <td>
+      <a href="http://127.0.0.1:5000">
+        <img src="/assets/home.png"/>
+      </a>
+    </td>
+    <td>
+      <a href="http://127.0.0.1:5000/search">
+        <img src="/assets/search.png"/>
+      </a>
+    </td>
   </tr>
 </table>
 

@@ -1,9 +1,9 @@
-Flask
+Flask==3.0.3
 jax==0.4.31
 jaxlib==0.4.31
-sentence-transformers==2.7.0
+sentence-transformers==3.0.1
 sentencepiece==0.2.0
-pandas==2.0.3
-transformers==4.40.1
-Pillow==9.4.0
-requests==2.31.0
+pandas==2.2.2
+transformers==4.44.0
+Pillow==10.4.0
+requests==2.32.3
