@@ -1,5 +1,12 @@
 # Spanking 🍑👋
 
+<table>
+  <tr>
+    <td><img src="/assets/home.png"/></td>
+    <td><img src="/assets/search.png"/></td>
+  </tr>
+</table>
+
 To use the 🍑👋 `VectorDB` class and access its functionality through a beautiful UI, follow these steps:
 
 ## Cloning the Repository
