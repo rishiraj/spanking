@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VectorDB Interface</title>
+</head>
+<body>
+    <h1>VectorDB Interface</h1>
+    <form action="{{ url_for('add_text') }}" method="post">
+        <input type="text" name="text" placeholder="Add new text" required>
+        <button type="submit">Add Text</button>
+    </form>
+    
+    <h2>Texts</h2>
+    <ul>
+        {% for text in texts %}
+            <li>
+                {{ text }}
+                <form action="{{ url_for('delete_text', index=loop.index0) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <form action="{{ url_for('update_text', index=loop.index0) }}" method="post" style="display:inline;">
+                    <input type="text" name="text" placeholder="Update text" required>
+                    <button type="submit">Update</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Save/Load Database</h2>
+    <form action="{{ url_for('save') }}" method="post">
+        <input type="text" name="file_path" placeholder="Save file path" required>
+        <button type="submit">Save</button>
+    </form>
+    <form action="{{ url_for('load') }}" method="post">
+        <input type="text" name="file_path" placeholder="Load file path" required>
+        <button type="submit">Load</button>
+    </form>
+
+    <h2>Search</h2>
+    <form action="{{ url_for('search') }}" method="post">
+        <input type="text" name="query" placeholder="Search query" required>
+        <select name="type">
+            <option value="text">Text</option>
+            <option value="image">Image</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
