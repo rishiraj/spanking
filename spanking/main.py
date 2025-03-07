@@ -50,7 +50,7 @@ class VectorDB:
         else:
             raise IndexError("Invalid index")
     
-    def add_doc(self, list_file_path, chunk_size=600, chunk_overlap=40):
+    def add_docs(self, list_file_path, chunk_size=600, chunk_overlap=40):
         loaders = [PyPDFLoader(x) for x in list_file_path]
         pages = []
         for loader in loaders:

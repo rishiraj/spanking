@@ -7,3 +7,5 @@ pandas==2.2.2
 transformers==4.44.0
 Pillow==10.4.0
 requests==2.32.3
+langchain==0.3.20
+langchain-community==0.3.19
