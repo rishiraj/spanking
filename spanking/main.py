@@ -1,5 +1,6 @@
 import jax
 import jax.numpy as jnp
+import json
 import pickle
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
@@ -76,7 +77,14 @@ class VectorDB:
         else:
             raise ValueError("Invalid search type. Supported types are 'text' and 'image'.")
         top_indices = jnp.argsort(similarities)[-top_k:][::-1]
-        return [(self.texts[i], float(similarities[i]), self.metadatas[i]) for i in top_indices]
+        
+        results = [{
+            "text": self.texts[i],
+            "similarity": float(similarities[i]),
+            "metadata": self.metadatas[i]
+        } for i in top_indices]
+        
+        return json.dumps(results, indent=4)
 
     def save(self, file_path):
         with open(file_path, 'wb') as file:
