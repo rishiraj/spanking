@@ -11,9 +11,11 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 class VectorDB:
-    def __init__(self, model_name='avsolatorio/GIST-small-Embedding-v0'):
+    def __init__(self, model_name='avsolatorio/GIST-small-Embedding-v0', image_model_name="google/siglip2-so400m-patch16-384"):
+        self.model_name = model_name
+        self.image_model_name = image_model_name
         self.model = SentenceTransformer(model_name, trust_remote_code=True)
-        self.image_classifier = pipeline(task="zero-shot-image-classification", model="google/siglip2-so400m-patch16-384")
+        self.image_classifier = pipeline(task="zero-shot-image-classification", model=image_model_name)
         self.texts = []
         self.embeddings = []
         self.metadatas = []
@@ -87,13 +89,25 @@ class VectorDB:
         return json.dumps(results, indent=4)
 
     def save(self, file_path):
+        data = {
+            "model_name": self.model_name,
+            "image_model_name": self.image_model_name,
+            "texts": self.texts,
+            "embeddings": self.embeddings.tolist(),
+            "metadatas": self.metadatas
+        }
         with open(file_path, 'wb') as file:
-            pickle.dump(self, file)
+            pickle.dump(data, file)
 
     @staticmethod
     def load(file_path):
         with open(file_path, 'rb') as file:
-            return pickle.load(file)
+            data = pickle.load(file)
+        vdb = VectorDB(data["model_name"], data["image_model_name"])
+        vdb.texts = data["texts"]
+        vdb.embeddings = jnp.array(data["embeddings"])
+        vdb.metadatas = data["metadatas"]
+        return vdb
 
     def to_df(self):
         data = {
